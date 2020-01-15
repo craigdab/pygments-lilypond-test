@@ -1,18 +1,5 @@
 from setuptools import setup
 
-meta_lexers = [
-    'aterm    = metaborg.pygments.lexers.meta:ATermLexer',
-    'esv      = metaborg.pygments.lexers.meta:ESVLexer',
-    'nabl     = metaborg.pygments.lexers.meta:NaBLLexer',
-    'nabl2    = metaborg.pygments.lexers.meta:NaBL2Lexer',
-    'sdf3     = metaborg.pygments.lexers.meta:SDF3Lexer',
-    'stratego = metaborg.pygments.lexers.meta:StrategoLexer',
-    'dynsem   = metaborg.pygments.lexers.meta:DynSemLexer',
-    'doc-lex  = metaborg.pygments.lexers.meta:DocLEXLexer',
-    'doc-cf-[ = metaborg.pygments.lexers.meta:DocCFSquareLexer',
-    'doc-cf-< = metaborg.pygments.lexers.meta:DocCFPointyLexer',
-]
-
 lexers = [
     'lilypond   = lilypond:LilyPondLexer',
 ]
@@ -26,7 +13,7 @@ setup(
     author_email='craig.dabelstein@gmail.com',
     license='MIT',
     keywords='syntax highlighting lilypond',
-    url='http://github.com/rsmenon/pygments-mathematica/',
+    url='https://github.com/craigdab/pygments-lilypond-test',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: End Users/Desktop',
