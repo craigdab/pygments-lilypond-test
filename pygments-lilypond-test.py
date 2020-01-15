@@ -16,22 +16,23 @@ class LilyPondLexer(RegexLexer):
             (r'%.*\n', Comment.Singleline),
 
             # Dynamics
-            (r'\\[<!>]|', Dynamic),
-            (r'\\(f{1,5}|p{1,5}', Dynamic),
-            (r'|mf|mp|fp|spp?|sff?|sfz|rfz', Dynamic),
-            (r'|cresc|decresc|dim|cr|decr', Dynamic),
-            (r')(?![A-Za-z])', Dynamic),
+            (r'\\[<!>]|', Literal),
+            (r'\\f{1,5}|p{1,5}', Literal),
+            (r'|mf|mp|fp|spp?|sff?|sfz|rfz', Literal),
+            (r'|cresc|decresc|dim|cr|decr', Literal),
+            (r'(?![A-Za-z])', Literal),
 
             # Articulations
-            (r'[-_^][_.>|!+^-]', Articulation),
+            (r'[-_^][_.>|!+^-]', Literal),
 
             # Duration
-            (r'(\\(maxima|longa|breve)\b|(1|2|4|8|16|32|64|128|256|512|1024|2048)(?!\d))', Duration),
+            (r'\\(maxima|longa|breve)',     ),
+            (r'\b|(1|2|4|8|16|32|64|128|256|512|1024|2048)(?!\d))', Number),
 
             # Dot
-            (r'\.', Dot),
+            # (r'\.', Dot),
 
             # Scaling
-            (r'\*[\t ]*\d+(/\d+)?', Scaling)
+            # (r'\*[\t ]*\d+(/\d+)?', Scaling)
         ]
     }
