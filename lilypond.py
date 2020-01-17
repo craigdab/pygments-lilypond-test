@@ -16,6 +16,25 @@ class LilyPondLexer(RegexLexer):
             # Whitespace
             (r'\s', Text),
 
+            # note names # add ' and , and not working yet
+            (r'\b\w[a-z]', Text),
+
+            # text in quotation marks
+            (r'"(.*?)"', Text),
+
+            # curly brackets
+            (r'\{|\}', Text),
+
+            # double angle brackets
+            (r'<<|>>', Text),
+
+            # pipe symbol, bar check, bar number check
+            (r'\|', Text),
+            (r'\\barNumberCheck\s\#\d+', Text),
+
+            # direction indicator
+            (r'\_|\^', Text),
+
             # LilyPond Keywords
             (r'\\version|\\accepts|\\alias|\\consists|\\defaultchild|\\denies|\\hide|\\include|\\language|\\name|\\omit|\\once|\\set|\\unset|\\override|\\revert|\\remove|\\temporary|\\undo|\\score|\\book|\\bookpart|\\header|\\paper|midi|\\layout|\\with|\\context', Keyword.Reserved),
             # Lilypond Keywords commented out in python-ly/ly/words.py
@@ -26,22 +45,29 @@ class LilyPondLexer(RegexLexer):
             (r'%.*\n', Comment.Singleline),
 
             # Dynamics
-            #(r'\\[<!>]|', Literal),
-            (r'\\f{1,5}\s|p{1,5}\s', Name.Function), #added a space after the dynamic to make it work but this is probably not the right way
+            (r'\\!', Text),
+            (r'\\f{1,5}\s|\\p{1,5}\s', Name.Function), #added a space after the dynamic to make it work but this is probably not the right way
             (r'\\mf|\\mp|\\fp|\\sp|\\spp|\\sf|\\sff|\\sfp|\\sfz|\\rfz|\\fz', Name.Function),
             #(r'(?![A-Za-z])', Literal),
             (r'\\cr|\\cresc|\\crescHairpin|\\crescTextCresc|\\decr|\\decresc|\\dim|\\dimHairpin|\\dimTextDecr|\\dimTextDecresc|\\dimTextDim|\\endcr|\\endcresc|\\enddecr|\\enddim', Name.Function),
+            (r'\\<|\\>', Text),
 
             # Articulations
-            #(r'[-_^][_.>|!+^-]', Literal),
+            (r'[-_^][_.>|!+^-]', Text),
             (r'\\accent|\\espressivo|\\marcato|\\portato|\\staccatissimo|\\staccato|\\tenuto', Keyword.Reserved),
+
+            # slurs
+            (r'\(|\)', Text),
 
             # Duration
             (r'\\maxima|\\longa|\\breve', Keyword.Reserved),
-            #(r'\b|1|2|4|8|16|32|64|128|256|512|1024|2048(?!\d)', Keyword.Pseudo), NOT WORKING YET
+            (r'\b1|2(\.*)|4|8|16|32|64|128|256|512|1024|2048(?!\d)', Keyword.Pseudo),
 
-            # Dot
-            #(r'\.', Punctuation),
+            # Dot -- see example above
+            #(r'\.*', Keyword.Pseudo),
+
+            # Asterix
+            (r'\d*\*\d*', Keyword.Pseudo),
 
             # Fermatas
             (r'\\shortfermata|\\fermata|\\longfermata|\\verylongfermata|\\fermataMarkup', Keyword.Reserved), # clash with fermata and fermataMarkup
