@@ -16,8 +16,11 @@ class LilyPondLexer(RegexLexer):
             # Whitespace
             (r'\s', Text),
 
-            # note names # add ' and , and not working yet
-            (r'\b\w[a-z]', Text),
+            # Pitch
+            (r'\b[a-z]+(\'|,)*', Text),
+
+            # Whole bar rests
+            (r'\bR', Text),
 
             # text in quotation marks
             (r'"(.*?)"', Text),
@@ -36,21 +39,24 @@ class LilyPondLexer(RegexLexer):
             (r'\_|\^', Text),
 
             # LilyPond Keywords
-            (r'\\version|\\accepts|\\alias|\\consists|\\defaultchild|\\denies|\\hide|\\include|\\language|\\name|\\omit|\\once|\\set|\\unset|\\override|\\revert|\\remove|\\temporary|\\undo|\\score|\\book|\\bookpart|\\header|\\paper|midi|\\layout|\\with|\\context', Keyword.Reserved),
+            (r'\\version|\\accepts|\\alias|\\consists|\\defaultchild|\\denies|\\hide|\\include|\\language|\\name|\\omit|\\once|\\(un)?set|\\override|\\revert|\\remove|\\temporary|\\undo|\\score|\\header|\\paper|\\midi|\\layout|\\with|\\context', Keyword.Reserved),
             # Lilypond Keywords commented out in python-ly/ly/words.py
             #'description',#'grobdescriptions',#'invalid',#'objectid',#'sequential',#'simultaneous',#'type',
+
+            # Book
+            (r'\\book(part|OutputName|OutputSuffix)?', Keyword.Reserved),
     
             # Comments
             (r'%{.%}', Comment.Multiline),
             (r'%.*\n', Comment.Singleline),
 
             # Dynamics
-            (r'\\!', Text),
-            (r'\\f{1,5}\s|\\p{1,5}\s', Name.Function), #added a space after the dynamic to make it work but this is probably not the right way
-            (r'\\mf|\\mp|\\fp|\\sp|\\spp|\\sf|\\sff|\\sfp|\\sfz|\\rfz|\\fz', Name.Function),
+            (r'\\!', Name.Function),
+            (r'\\f{1,5}\b|\\p{1,5}\b', Name.Function),
+            (r'\\mf|\\mp|\\fp|\\sp(p)?|\\sf(f)?|\\sfp|\\sfz|\\(r)?fz', Name.Function),
             #(r'(?![A-Za-z])', Literal),
-            (r'\\cr|\\cresc|\\crescHairpin|\\crescTextCresc|\\decr|\\decresc|\\dim|\\dimHairpin|\\dimTextDecr|\\dimTextDecresc|\\dimTextDim|\\endcr|\\endcresc|\\enddecr|\\enddim', Name.Function),
-            (r'\\<|\\>', Text),
+            (r'\\crescHairpin|\\crescTextCresc|\\cr(esc)?|\\decr(esc)?|\\dim(Hairpin)?|\\dimTextDecr(esc)?|\\dimTextDim|\\endcr(esc)?|\\enddecr|\\enddim', Name.Function),
+            (r'\\<|\\>', Name.Function),
 
             # Articulations
             (r'[-_^][_.>|!+^-]', Text),
@@ -61,76 +67,81 @@ class LilyPondLexer(RegexLexer):
 
             # Duration
             (r'\\maxima|\\longa|\\breve', Keyword.Reserved),
-            (r'\b1|2(\.*)|4|8|16|32|64|128|256|512|1024|2048(?!\d)', Keyword.Pseudo),
+            (r'(1|2|4|8|16|32|64|128|256|512|1024|2048)\.*(?!\d)', Keyword.Pseudo),
 
-            # Dot -- see example above
-            #(r'\.*', Keyword.Pseudo),
-
-            # Asterix
-            (r'\d*\*\d*', Keyword.Pseudo),
+            # Scaling
+            (r'\*[\t ]*\d+(/\d+)?', Keyword.Pseudo), # Asterix #(r'\d*\*\d*', Keyword.Pseudo),
 
             # Fermatas
-            (r'\\shortfermata|\\fermata|\\longfermata|\\verylongfermata|\\fermataMarkup', Keyword.Reserved), # clash with fermata and fermataMarkup
+            (r'\\shortfermata|\\(very)?longfermata', Keyword.Reserved),
+            (r'\\fermata(Markup)?', Keyword.Reserved),
 
             # Ornaments
-            (r'\\prall|\\mordent|\\prallmordent|\\turn|\\upprall|\\downprall|\\upmordent|\\downmordent|\\lineprall|\\prallprall|\\pralldown|\\prallup|\\reverseturn|\\trill', Keyword.Reserved),
+            (r'\\prall(mordent|up|down|prall)?|\\(up|down)?mordent|\\(reverse)?turn|\\(up|down|line)?prall|\\trill', Keyword.Reserved),
 
             # Instrument Scripts
-            (r'\\upbow|\\downbow|\\flageolet|\\thumb|\\snappizzicato|\\open|\\halfopen|\\stopped|\\lheel|\\rheel|\\ltoe|\\rtoe', Keyword.Reserved),
+            (r'\\(up|down)?bow|\\flageolet|\\thumb|\\snappizzicato|\\(half)?open|\\stopped|\\(l|r)?heel|\\(l|r)?toe', Keyword.Reserved),
 
             # Repeat Scripts
             (r'\\segno|coda|varcoda', Keyword.Reserved),
 
             # Ancient Scripts
-            (r'\\ictus|\\accentus|\\circulus|\\semicirculus|\\signumcongruentiae', Keyword.Reserved),
+            (r'\\ictus|\\accentus|\\(semi)?circulus|\\signumcongruentiae', Keyword.Reserved),
 
             # Modes
             (r'\\major|\\minor|\\ionian|\\dorian|\\phrygian|\\lydian|\\mixolydian|\\aeolian|\\locrian', Keyword.Reserved),  
 
             # Contexts
-            (r'\\ChoirStaff|\\ChordNames|\\CueVoice|\\Devnull|\\DrumStaff|\\DrumVoice|\\Dynamics|\\FiguredBass|\\FretBoards|\\Global|\\GrandStaff|\\GregorianTranscriptionStaff|\\GregorianTranscriptionVoice|\\KievanStaff|\\KievanVoice|\\Lyrics|\\MensuralStaff|\\MensuralVoice|\\NoteNames|\\NullVoice|\\PetrucciStaff|\\PetrucciVoice|\\PianoStaff|\\RhythmicStaff|\\Score|\\Staff|\\StaffGroup|\\TabStaff|\\TabVoice|\\Timing|\\VaticanaStaff|\\VaticanaVoice|\\Voice', Keyword.Reserved),
+            (r'ChordNames|Devnull|Dynamics|FiguredBass|FretBoards|Global|Lyrics|NoteNames|Score|StaffGroup|Timing', Keyword.Reserved),
+
+            # Contexts -- Staff
+            (r'(Choir|Drum|Grand|GregorianTranscription|Kievan|Mensural|Petrucci|Piano|Rhythmic|Tab|Vaticana)?Staff', Keyword.Reserved), 
+
+            # Contexts -- Voice
+            (r'(Cue|Drum|GregorianTranscription|Kievan|Mensural|Null|Petrucci|Tab|Vaticana)?Voice', Keyword.Reserved),
 
             # Header Variables
-            (r'dedication|title|subtitle|subsubtitle|poet|composer|meter|opus|arranger|instrument|piece|breakbefore|copyright|tagline|mutopiatitle|mutopiacomposer|mutopiapoet|mutopiaopus|mutopiainstrument|date|enteredby|source|style|maintainer|maintainerEmail|maintainerWeb|moreInfo|lastupdated|texidoc|footer', Keyword.Reserved),
-
-
-            # Scaling
-            #(r'\*[\t ]*\d+(/\d+)?', Scaling)
+            (r'dedication|poet|composer|meter|opus|arranger|instrument|piece|breakbefore|copyright|tagline|date|enteredby|source|style|moreInfo|lastupdated|texidoc|footer', Keyword.Reserved),
+            (r'(subsub|sub)?title', Keyword.Reserved), # title, subtitle, subsubtitle
+            (r'mutopia(title|composer|poet|opus|instrument)?', Keyword.Reserved), #mutopia
+            (r'maintainer(Email|Web)?', Keyword.Reserved), #maintainer
 
             # LilyPond music commands - starting with letter A
-            (r'\\absolute|\\acciaccatura|\\accidentalStyle|\\addChordShape|\\addInstrumentDefinition|\\addlyrics|\\addQuote|\\afterGrace|\\aikenHeads|\\aikenHeadsMinor|\\allowPageTurn|\\alterBroken|\\alternative|\\appendToTag|\\applyContext|\\applyMusic|\\applyOutput|\\appoggiatura|\\arpeggio|\\arpeggioArrowDown|\\arpeggioArrowUp|\\arpeggioBracket|\\arpeggioNormal|\\arpeggioParenthesis|\\ascendens|\\auctum|\\augmentum|\\autoAccidentals|\\autoBeamOff|\\autoBeamOn|\\autochange', Name.Function),
+            (r'\\absolute|\\acciaccatura|\\accidentalStyle|\\addChordShape|\\addInstrumentDefinition|\\addlyrics|\\addQuote|\\afterGrace|\\aikenHeads(Minor)?|\\allowPageTurn|\\alterBroken|\\alternative|\\appendToTag|\\applyContext|\\applyMusic|\\applyOutput|\\appoggiatura|\\ascendens|\\auctum|\\augmentum|\\autoAccidentals|\\autoBeamOff|\\autoBeamOn|\\autochange', Name.Function),
+            # Arpeggios
+            (r'\\arpeggio(ArrowDown|ArrowUp|Bracket|Normal|Parenthesis)?', Name.Function),
             #'AncientRemoveEmptyStaffContext',
                 
             # LilyPond music commands - starting with letter B   
-            (r'\\balloonGrobText|\\balloonLengthOff|\\balloonLengthOn|\\balloonText|\\bar|\\barNumberCheck|\\bassFigureExtendersOff|\\bassFigureExtendersOn|\\bassFigureStaffAlignmentDown|\\bassFigureStaffAlignmentNeutral|\\bassFigureStaffAlignmentUp|\\bendAfter|\\blackTriangleMarkup|\\bookOutputName|\\bookOutputSuffix|\\bracketCloseSymbol|\\bracketOpenSymbol|\\break|\\breathe', Name.Function),
+            (r'\\balloon(GrobText|LengthOff|LengthOn|Text)?|\\bar\s|\\bassFigure(ExtendersOff|ExtendersOn|StaffAlignmentDown|StaffAlignmentNeutral|StaffAlignmentUp)?|\\bendAfter|\\blackTriangleMarkup|\\bracket(Close|Open)?Symbol|\\break|\\breathe', Name.Function),
 
             # LilyPond music commands - starting with letter C   
-            (r'\\cadenzaOff|\\cadenzaOn|\\caesura|\\cavum|\\change|\\chordmode|\\chordRepeats|\\chords|\\clef|\\cm|\\compoundMeter|\\compressFullBarRests|\\context|\\crossStaff|\\cueClef|\\cueClefUnset|\\cueDuring|\\cueDuringWithClef', Name.Function),
+            (r'\\cadenza(Off|On)?|\\caesura|\\cavum|\\change|\\chordmode|\\chordRepeats|\\chords|\\clef|\\cm|\\compoundMeter|\\compressFullBarRests|\\context|\\crossStaff|\\cueClef(Unset)?|\\cueDuring(WithClef)?', Name.Function),
             #'chordNameSeparator', #'chordPrefixSpacer', #'chordRootNamer',
 
             # LilyPond music commands - starting with letter D
-            (r'\\dashBar|\\dashDash|\\dashDot|\\dashHat|\\dashLarger|\\dashPlus|\\dashUnderscore|\\deadNote|\\default|\\defaultNoteHeads|\\defaultTimeSignature|\\defineBarLine|\\deminutum|\\denies|\\descendens|\\displayLilyMusic|\\displayMusic|\\divisioMaior|\\divisioMaxima|\\divisioMinima|\\dotsDown|\\dotsNeutral|\\dotsUp|\\drummode|\\drumPitchTable|\\drums|\\dynamicDown|\\dynamicNeutral|\\dynamicUp', Name.Function),
+            (r'\\dash(Bar|Dash|Dot|Hat|Larger|Plus|Underscore)?\\deadNote|\\default(NoteHeads|TimeSignature)?|\\defineBarLine|\\deminutum|\\denies|\\descendens|\\displayLilyMusic|\\displayMusic|\\divisio(Maior|Maxima|Minima)?|\\dots(Down|Neutral|Up)?|\\drummode|\\drumPitchTable|\\drums|\\dynamic(Down|Neutral|Up)?', Name.Function),
 
             # LilyPond music commands - starting with letter E
-            (r'\\easyHeadsOff|\\easyHeadsOn|\\endincipit|\\endSpanners|\\episemFinis|\\episemInitium|\\escapedBiggerSymbol|\\escapedExclamationSymbol|\\escapedParenthesisCloseSymbol|\\escapedParenthesisOpenSymbol|\\escapedSmallerSymbol|\\expandFullBarRests', Name.Function),
+            (r'\\easyHeads(Off|On)?|\\endincipit|\\endSpanners|\\episem(Finis|Initium)?|\\escaped(BiggerSymbol|ExclamationSymbol|ParenthesisCloseSymbol|ParenthesisOpenSymbol|SmallerSymbol)?|\\expandFullBarRests', Name.Function),
 
             # LilyPond music commands - starting with letter F
-            (r'\\featherDurations|\\figuremode|\\figures|\\finalis|\\fingeringOrientations|\\flexa|\\frenchChords|\\fullJazzExceptions|\\funkHeads|\\funkHeadsMinor', Name.Function),
+            (r'\\featherDurations|\\figuremode|\\figures|\\finalis|\\fingeringOrientations|\\flexa|\\frenchChords|\\fullJazzExceptions|\\funkHeads(Minor)?', Name.Function),
     
             # LilyPond music commands - starting with letter G
-            (r'\\germanChords|\\glissando|\\grace|\\graceSettings', Name.Function),
+            (r'\\germanChords|\\glissando|\\grace(Settings)?', Name.Function),
 
             # LilyPond music commands - starting with letter H
-            (r'\\harmonic|\\hideNotes|\\hideStaffSwitch|\\huge', Name.Function),
+            (r'\\harmonic|\\hide(Notes|StaffSwitch)?|\\huge', Name.Function),
 
             # LilyPond music commands - starting with letter I
-            (r'\\ignatzekExceptionMusic|\\ignatzekExceptions|\\iij|\\IIJ|\\ij|\\IJ|\\improvisationOff|\\improvisationOn|\\in|\\inclinatum|\\includePageLayoutFile|\\indent|\\instrumentSwitch|\\instrumentTransposition|\\interscoreline|\\italianChords', Name.Function),
+            (r'\\ignatzekException(Music)?|\\iij|\\IIJ|\\ij|\\IJ|\\improvisation(Off|On)?|\\in(clinatum)?|\\includePageLayoutFile|\\indent|\\instrument(Switch|Transposition)?|\\interscoreline|\\italianChords', Name.Function),
 
             # LilyPond music commands - starting with letter K
             (r'\\keepWithTag|\\key|\\killCues', Name.Function),
 
             # LilyPond music commands - starting with letter L
-            (r'\\label|\\laissezVibrer|\\large|\\ligature|\\linea|\\lyricmode|\\lyrics|\\lyricsto', Name.Function),
+            (r'\\label|\\laissezVibrer|\\large|\\ligature|\\linea|\\lyricmode|\\lyrics(to)?', Name.Function),
 
             # LilyPond music commands - starting with letter M
             (r'\\maininput|\\majorSevenSymbol|\\makeClusters|\\mark|\\markLengthOff|\\markLengthOn|\\markup|\\markuplines|\\markuplist|\\melisma|\\melismaEnd|\\mergeDifferentlyDottedOff|\\mergeDifferentlyDottedOn|\\mergeDifferentlyHeadedOff|\\mergeDifferentlyHeadedOn|\\mm|\\musicMap', Name.Function),
