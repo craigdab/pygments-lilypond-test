@@ -107,7 +107,7 @@ class LilyPondLexer(RegexLexer):
             (r'maintainer(Email|Web)?', Keyword.Reserved), #maintainer
 
             # LilyPond music commands - starting with letter A
-            (r'\\absolute|\\acciaccatura|\\accidentalStyle|\\addChordShape|\\addInstrumentDefinition|\\addlyrics|\\addQuote|\\afterGrace|\\aikenHeads(Minor)?|\\allowPageTurn|\\alterBroken|\\alternative|\\appendToTag|\\applyContext|\\applyMusic|\\applyOutput|\\appoggiatura|\\ascendens|\\auctum|\\augmentum|\\autoAccidentals|\\autoBeamOff|\\autoBeamOn|\\autochange', Name.Function),
+            (r'\\absolute|\\acciaccatura|\\accidentalStyle|\\addChordShape|\\addInstrumentDefinition|\\addlyrics|\\addQuote|\\afterGrace(Fraction)?|\\aikenHeads(Minor)?|\\allowPageTurn|\\alterBroken|\\alternative|\\appendToTag|\\applyContext|\\applyMusic|\\applyOutput|\\appoggiatura|\\ascendens|\\auctum|\\augmentum|\\autoAccidentals|\\autoBeamOff|\\autoBeamOn|\\autochange', Name.Function),
             # Arpeggios
             (r'\\arpeggio(ArrowDown|ArrowUp|Bracket|Normal|Parenthesis)?', Name.Function),
             #'AncientRemoveEmptyStaffContext',
@@ -144,55 +144,55 @@ class LilyPondLexer(RegexLexer):
             (r'\\label|\\laissezVibrer|\\large|\\ligature|\\linea|\\lyricmode|\\lyrics(to)?', Name.Function),
 
             # LilyPond music commands - starting with letter M
-            (r'\\maininput|\\majorSevenSymbol|\\makeClusters|\\mark|\\markLengthOff|\\markLengthOn|\\markup|\\markuplines|\\markuplist|\\melisma|\\melismaEnd|\\mergeDifferentlyDottedOff|\\mergeDifferentlyDottedOn|\\mergeDifferentlyHeadedOff|\\mergeDifferentlyHeadedOn|\\mm|\\musicMap', Name.Function),
+            (r'\\maininput|\\majorSevenSymbol|\\makeClusters|\\mark(LengthOff|LengthOn)?|\\markup(lines|list)?|\\melisma(End)?|\\mergeDifferentlyDotted(Off|On)?|\\mergeDifferentlyHeaded(Off|On)?|\\mm|\\musicMap', Name.Function),
 
             # LilyPond music commands - starting with letter N
-            (r'\\neumeDemoLayout|\\new|\\newSpacingSection|\\noBeam|\\noBreak|\\noPageBreak|\\noPageTurn|\\normalsize|\\notemode|\\numericTimeSignature', Name.Function),
+            (r'\\neumeDemoLayout|\\new(SpacingSection)?|\\no(Beam|Break|PageBreak|PageTurn)?|\\normalsize|\\notemode|\\numericTimeSignature', Name.Function),
 
             # LilyPond music commands - starting with letter O
-            (r'\\octaveCheck|\\oldaddlyrics|\\oneVoice|\\oriscus|\\ottava|\\override|\\overrideProperty|\\overrideTimeSignatureSettings',  Name.Function),
+            (r'\\octaveCheck|\\oldaddlyrics|\\oneVoice|\\oriscus|\\ottava|\\override(Property|TimeSignatureSettings)?',  Name.Function),
 
             # LilyPond music commands - starting with letter P
-            (r'\\pageBreak|\\pageTurn|\\palmMute|\\palmMuteOn|\\parallelMusic|\\parenthesisCloseSymbol|\\parenthesisOpenSymbol|\\parenthesize|\\partcombine|\\partCombineListener|\\partial|\\partialJazzExceptions|\\partialJazzMusic|\\pes|\\phrasingSlurDashed|\\phrasingSlurDotted|\\phrasingSlurDown|\\phrasingSlurNeutral|\\phrasingSlurSolid|\\phrasingSlurUp|\\pipeSymbol|\\pitchedTrill|\\pointAndClickOff|\\pointAndClickOn|\\predefinedFretboardsOff|\\predefinedFretboardsOn|\\pt|\\pushToTag', Name.Function),
+            (r'\\page(Break|Turn)?|\\palmMute(On)?|\\parallelMusic|\\parenthesis(Close|Open)?Symbol|\\parenthesize|\\partcombine|\\partCombineListener|\\partial(JazzExceptions|JazzMusic)?|\\pes|\\phrasingSlur(Dashed|Dotted|Down|Neutral|Solid|Up)?|\\pipeSymbol|\\pitchedTrill|\\pointAndClick(Off|On)?|\\predefinedFretboards(Off|On)?|\\pt|\\pushToTag', Name.Function),
 
             # LilyPond music commands - starting with letter Q
             (r'\\quilisma|\\quoteDuring', Name.Function),
 
             # LilyPond music commands - starting with letter R
-            (r'\\relative|\\RemoveEmptyRhythmicStaffContext|\\RemoveEmptyStaffContext|\\removeWithTag|\\repeat|\\repeatTie|\\resetRelativeOctave|\\responsum|\\rest|\\revert|\\rightHandFinger', Name.Function),
+            (r'\\relative|\\RemoveEmpty(Rhythmic)?StaffContext|\\removeWithTag|\\repeat(Tie)?|\\resetRelativeOctave|\\responsum|\\rest|\\revert|\\rightHandFinger', Name.Function),
 
             # LilyPond music commands - starting with letter S
-            (r'\\sacredHarpHeads|\\sacredHarpHeadsMinor|\\scaleDurations|\\scoreTweak|\\semiGermanChords|\\set|\\shape|\\shiftDurations|\\shiftOff|\\shiftOn|\\shiftOnn|\\shiftOnnn|\\showStaffSwitch|\\single|\\skip|\\skipTypesetting|\\slurDashed|\\slurDotted|\\slurDown|\\slurNeutral|\\slurSolid|\\slurUp|\\small|\\sostenutoOff|\\sostenutoOn|\\southernHarmonyHeads|\\southernHarmonyHeadsMinor|\\spacingTweaks|\\startAcciaccaturaMusic|\\startAppoggiaturaMusic|\\startGraceMusic|\\startGroup|\\startStaff|\\startTextSpan|\\startTrillSpan|\\stemDown|\\stemNeutral|\\stemUp|\\stopAcciaccaturaMusic|\\stopAppoggiaturaMusic|\\stopGraceMusic|\\stopGroup|\\stopStaff|\\stopTextSpan|\\stopTrillSpan|\\stringTuning|\\strokeFingerOrientations|\\stropha|\\sustainOff|\\sustainOn', Name.Function),
+            (r'\\sacredHarpHeads(Minor)?|\\scaleDurations|\\scoreTweak|\\semiGermanChords|\\set|\\shape|\\shift(Durations|Off|On)?|\\shiftOnn(n)?|\\showStaffSwitch|\\single|\\skip(Typesetting)?|\\slur(Dashed|Dotted|Down|Neutral|Solid|Up)?|\\small|\\sostenuto(Off|On)?|\\southernHarmonyHeads(Minor)?|\\spacingTweaks|\\start(Acciaccatura|Appoggiatura)?Music|\\start(GraceMusic|Group|Staff|TextSpan|TrillSpan)?|\\stem(Down|Neutral|Up)?|\\stop(Acciaccatura|Appoggiatura)?Music|\\stop(GraceMusic|Group|Staff|TextSpan|TrillSpan)?|\\stringTuning|\\strokeFingerOrientations|\\stropha|\\sustain(Off|On)?', Name.Function),
 
             # LilyPond music commands - starting with letter T
-            (r'\\tabFullNotation|\\tag|\\teeny|\\tempo|\\tempoWholesPerMinute|\\textLengthOff|\\textLengthOn|\\textSpannerDown|\\textSpannerNeutral|\\textSpannerUp|\\tieDashed|\\tieDotted|\\tieDown|\\tieNeutral|\\tieSolid|\\tieUp|\\tildeSymbol|\\time|\\times|\\timing|\\tiny|\\tocItem|\\transpose|\\transposedCueDuring|\\transposition|\\treCorde|\\tuplet|\\tupletDown|\\tupletNeutral|\\tupletUp|\\tweak', Name.Function),
+            (r'\\tabFullNotation|\\tag|\\teeny|\\tempo(WholesPerMinute)?|\\textLength(Off|On)?|\\textSpanner(Down|Neutral|Up)?|\\tie(Dashed|Dotted|Down|Neutral|Solid|Up)?|\\tildeSymbol|\\time(s)?|\\timing|\\tiny|\\tocItem|\\transpose(dCueDuring)?|\\transposition|\\treCorde|\\tuplet(Down|Neutral|Up)?|\\tweak', Name.Function),
 
             # LilyPond music commands - starting with letter U-Z
-            (r'\\unaCorda|\\unfoldRepeats|\\unHideNotes|\\unit|\\unset|\\versus|\\virga|\\virgula|\\voiceFour|\\voiceFourStyle|\\voiceNeutralStyle|\\voiceOne|\\voiceOneStyle|\\voiceThree|\\voiceThreeStyle|\\voiceTwo|\\voiceTwoStyle|\\walkerHeads|\\walkerHeadsMinor|\\whiteTriangleMarkup|\\withMusicProperty', Name.Function),
+            (r'\\unaCorda|\\unfoldRepeats|\\unHideNotes|\\unit|\\versus|\\virga|\\virgula|\\voiceFour(Style)?|\\voiceNeutralStyle|\\voiceOne(Style)?|\\voiceThree(Style)?|\\voiceTwo(Style)?|\\walkerHeads(Minor)?|\\whiteTriangleMarkup|\\withMusicProperty', Name.Function),
 
             # Repeat variables
             (r'\\unfold|\\percent|\\volta|\\tremolo', Name.Variable),
 
             # Layout variables
-            (r'indent|short-indent|system-count|line-width|ragged-right|ragged-last', Name.Variable),
+            (r'(short-)?indent|system-count|line-width|ragged(-right|-last)?', Name.Variable),
 
             # Paper variables - fixed vertical
-            (r'paper-height|top-margin|bottom-margin|ragged-bottom|ragged-last-bottom', Name.Variable),
+            (r'paper-height|(top-|bottom-)?margin|ragged(-bottom|-last-bottom)?', Name.Variable),
 
             # Paper variables - horizontal
-            (r'paper-width|line-width|left-margin|right-margin|check-consistency|ragged-right|ragged-last|two-sided|inner-margin|outer-margin|binding-offset|horizontal-shift|indent|short-indent', Name.Variable),
+            (r'(paper-|line-)?width|(left-|right-)?margin|check-consistency|ragged(-right|-last)?|two-sided|(inner-|outer-)?margin|binding-offset|horizontal-shift|(short-)?indent', Name.Variable),
 
             # Paper variables - flex vertical
-            (r'markup-system-spacing|score-markup-spacing|score-system-spacing|system-system-spacing|markup-markup-spacing|last-bottom-spacing|top-system-spacing|top-markup-spacing', Name.Variable),
+            (r'(markup-|score-|system-)?system-spacing|(score-|markup-)?markup-spacing|last-bottom-spacing|top-(system-|markup-)?spacing', Name.Variable),
 
             # Paper variables - line breaking
-            (r'max-systems-per-page|min-systems-per-page|system-count|systems-per-page', Name.Variable),
+            (r'(max-|min-)?systems-per-page|system-count|systems-per-page', Name.Variable),
 
             # Paper variables - page breaking
-            (r'blank-after-score-page-force|blank-last-page-force|blank-page-force|page-breaking|         page-breaking-system-system-spacing|page-count', Name.Variable),
+            (r'(blank-after-score|blank-last-|blank-)?page-force|page-breaking(-system-system-spacing)?|page-count', Name.Variable),
 
             # Paper variables - page numbering
-            (r'auto-first-page-number|first-page-number|print-first-page-number|print-page-number', Name.Variable),
+            (r'(auto-|print-)?first-page-number|print-page-number', Name.Variable),
 
             # Paper variables - misc
             (r'page-spacing-weight|print-all-headers|system-separator-markup', Name.Variable),
@@ -201,7 +201,7 @@ class LilyPondLexer(RegexLexer):
             (r'annotate-spacing', Name.Variable),
     
             # Paper variables - different markups
-            (r'bookTitleMarkup|evenFooterMarkup|evenHeaderMarkup|oddFooterMarkup|oddHeaderMarkup|scoreTitleMarkup|tocItemMarkup|tocTitleMarkup', Name.Variable),
+            (r'(bookTitle|evenFooter|evenHeader|oddFooter|oddHeader|scoreTitle|tocItem|tocTitle)?Markup', Name.Variable),
 
             # Paper variables - fonts
             (r'fonts', Name.Variable),
@@ -212,9 +212,6 @@ class LilyPondLexer(RegexLexer):
             #'force-assignment',
             #'input-encoding',
             #'output-scale',
-            
-            # parser variable
-            (r'\\afterGraceFraction', Name.Variable),
     
 
             
