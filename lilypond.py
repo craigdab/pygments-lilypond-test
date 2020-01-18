@@ -29,12 +29,15 @@ class LilyPondLexer(RegexLexer):
             (r'cresc|decresc|dim|cr|decr', Name.Function),
             # (r'(?![A-Za-z])', Name.Function), I don't know what this does yet
 
-            #re_duration
+            # time signatures
+            (r'\d\/\d', Name.Function),
+
+            # duration
             (r'(\\(maxima|longa|breve)\b|(1|2|4|8|16|32|64|128|256|512|1024|2048)(?!\d))', Name.Function),
-            # re_dot
+            # dot
             (r'\.', Name.Function),
 
-            # re_scaling
+            # scaling
             (r'\*[\t ]*\d+(/\d+)?', Name.Function),
 
             # an identifier allowing letters and single hyphens in between
@@ -71,52 +74,35 @@ class LilyPondLexer(RegexLexer):
             # (r'\bR', Text),
 
             # text in quotation marks
-            # (r'"(.*?)"', String.Double),
+            (r'"(.*?)"', String.Double),
 
             # text variables (if that's what you call them)
             #(r'[A-Za-z]*', Text),
 
             # curly brackets
-            # (r'\{|\}', Punctuation),
+            (r'\{|\}', Punctuation),
 
             # double angle brackets
-            # (r'<<|>>', Text),
+            (r'<<|>>', Text),
 
             # equals sign
-            # (r'\=', Text),
+            (r'\=', Operator),
 
-            # pipe symbol, bar check, bar number check
-            # (r'\|', Text),
-            #(r'\\barNumberCheck\s\#\d+', Text),
+            # pipe symbol, bar check
+            (r'\|', Text),
+
+            # bar number check
+            (r'\#\d+', Text),
 
             # direction indicator
             # (r'\_|\^', Text),
     
             # Comments
-            (r'%{.%}', Comment.Multiline),
+            (r'%{(.|[\r\n])*?%}', Comment.Multiline),
             (r'%.*?\n', Comment.Singleline),
-
-            # Dynamics
-            #(r'\\!', Name.Function),
-            #(r'\\f{1,5}\b|\\p{1,5}\b', Name.Function),
-            #(r'\\mf|\\mp|\\fp|\\sp(p)?|\\sf(f)?|\\sfp|\\sfz|\\(r)?fz', Name.Function),
-            #(r'(?![A-Za-z])', Literal),
-            #(r'\\crescHairpin|\\crescTextCresc|\\cr(esc)?|\\decr(esc)?|\\dim(Hairpin)?|\\dimTextDecr(esc)?|\\dimTextDim|\\endcr(esc)?|\\enddecr|\\enddim', Name.Function),
-            #(r'\\<|\\>', Name.Function),
-
-            # Articulations
-            #(r'[-_^][_.>|!+^-]', Text),
-            #(r'\\accent|\\espressivo|\\marcato|\\portato|\\staccatissimo|\\staccato|\\tenuto', Keyword.Reserved),
 
             # slurs
             (r'\(|\)', Text),
-
-            # Duration
-            #(r'\\maxima|\\longa|\\breve', Keyword.Reserved),
-            #(r'(1|2|4|8|16|32|64|128|256|512|1024|2048)\.*(?!\d)', Keyword.Pseudo),
-
-            # Scaling
-            #(r'\*[\t ]*\d+(/\d+)?', Keyword.Pseudo), # Asterix #(r'\d*\*\d*', Keyword.Pseudo),
             
         ],
 
@@ -132,16 +118,16 @@ class LilyPondLexer(RegexLexer):
             (words(modes, prefix = r'\\'), Name.Function),
             (words(markupcommands, prefix = r'\\'), Name.Function),
             (words(markuplistcommands, prefix = r'\\'), Name.Function),
-            (words(contexts), Name.Variable),
+            (words(contexts), Name.Function),
             (words(midi_instruments), Name.Variable),
-            (words(scheme_values), Name.Function),
+            (words(scheme_values), Name.Variable),
             (words(header_variables), Name.Variable),
             (words(paper_variables), Name.Variable),
             (words(layout_variables), Name.Variable),
             #(words(midi_variables), Name.Variable),
-            (words(repeat_types), Name.Variable),
+            (words(repeat_types), Name.Function),
             (words(accidental_styles), Name.Variable),
-            (words(clefs), Name.Variable),
+            (words(clefs), Name.Function),
             (words(break_visibility), Name.Variable),
             (words(mark_formatters), Name.Variable),
         ],
