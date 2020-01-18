@@ -1,5 +1,5 @@
 # pygments-LilyPond-lexer
-![GitHub labels](https://img.shields.io/github/labels/craigdab/pygments-lilypond-test/help-wanted)
+
 A LilyPond lexer for Pygments to highlight LilyPond code snippets.
 
 ## To test the lexer:
