@@ -1,10 +1,24 @@
+#   LilyPondLexer - a syntax highlighter for Pygments
+#   Copyright (C) 2020  Craig Dabelstein
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import re
 from pygments.lexer import RegexLexer, include, words
 from pygments.token import *
 
 from pygments.lexers._lilypond_builtins import lilypond_keywords, lilypond_music_commands, articulations, ornaments, fermatas, instrument_scripts, repeat_scripts, ancient_scripts, modes, markupcommands, markuplistcommands, contexts, midi_instruments, scheme_values, header_variables, paper_variables, layout_variables, repeat_types, accidental_styles, clefs, break_visibility, mark_formatters
-
-
 
 __all__ = ['LilyPondLexer']
 

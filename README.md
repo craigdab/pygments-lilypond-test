@@ -2,7 +2,7 @@
 
 A LilyPond lexer for Pygments to highlight LilyPond code snippets.
 
-To test the lexer:
+## To test the lexer:
 
 1. Clone the pygments repo: [https://github.com/pygments/pygments]
 
@@ -16,3 +16,17 @@ To test the lexer:
 python -m pygments -O full -f html -o /tmp/example.html tests/examplefiles/example.ily```
 
 6. Open the `html` file: `/tmp/example.html`
+
+
+## Contribute
+
+- Issue Tracker: github.com/craigdab/pygments-lilypond-test/issues
+- Source Code: github.com/craigdab/pygments-lilypond-test
+
+## Support
+
+If you are having issues, please let me know at: craig.dabelstein@gmail.com
+
+## License
+
+The project is licensed under the GNU General Public License.
