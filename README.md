@@ -2,6 +2,8 @@
 
 A LilyPond lexer for Pygments to highlight LilyPond code snippets.
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## To test the lexer:
 
 1. Clone the pygments repo: [https://github.com/pygments/pygments]
@@ -12,10 +14,12 @@ A LilyPond lexer for Pygments to highlight LilyPond code snippets.
 
 4. Change to the `pygments` folder: `cd pygments` folder
 
-5. Run the lexer to convert the LilyPond file to html: ```
+5. Run ```make mapfiles```
+
+6. Run the lexer to convert the LilyPond file to html: ```
 python -m pygments -O full -f html -o /tmp/example.html tests/examplefiles/example.ily```
 
-6. Open the `html` file: `/tmp/example.html`
+7. Open the `html` file: `/tmp/example.html`
 
 
 ## Contribute
