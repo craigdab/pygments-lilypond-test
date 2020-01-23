@@ -1,18 +1,23 @@
-#   LilyPondLexer - a syntax highlighter for Pygments
-#   Copyright (C) 2020  Craig Dabelstein
 #
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
+# Copyright (c) 2008 - 2015 by Wilbert Berendsen
 #
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
 #
-#   You should have received a copy of the GNU General Public License
-#   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+# See http://www.gnu.org/licenses/ for more information.
+
+
+# LilyPond reserved words for auto completion and highlighting.
 
 
 #from __future__ import unicode_literals
@@ -125,10 +130,10 @@ lilypond_music_commands = (
     'compoundMeter', # since 2.16
     'compressFullBarRests',
     'context',
-    'cr',
-    'cresc',
-    'crescHairpin',
-    'crescTextCresc',
+    #'cr',
+    #'cresc',
+    #'crescHairpin',
+    #'crescTextCresc',
     'crossStaff', # since 2.16
     'cueClef',  # since 2.16
     'cueClefUnset',  # since 2.16
@@ -142,7 +147,7 @@ lilypond_music_commands = (
     'dashPlus',
     'dashUnderscore',
     'deadNote',  # since 2.16
-    'decr',
+    #'decr',
     'default',
     'defaultNoteHeads',  # since 2.16
     'defaultTimeSignature',
@@ -150,7 +155,7 @@ lilypond_music_commands = (
     'deminutum',
     'denies',
     'descendens',
-    'dim',
+    #'dim',
     'dimHairpin',
     'dimTextDecr',
     'dimTextDecresc',
@@ -185,24 +190,24 @@ lilypond_music_commands = (
     'escapedParenthesisOpenSymbol',
     'escapedSmallerSymbol',
     'expandFullBarRests',
-    'f',
+    #'f',
     'featherDurations',
     'fermataMarkup',
-    'ff',
-    'fff',
-    'ffff',
-    'fffff',
+    #'ff',
+    #'fff',
+    #'ffff',
+    #'fffff',
     'figuremode',
     'figures',
     'finalis',
     'fingeringOrientations',
     'flexa',
-    'fp',
+    #'fp',
     'frenchChords',
     'fullJazzExceptions',
     'funkHeads',
     'funkHeadsMinor',
-    'fz',
+    #'fz',
     'germanChords',
     'glissando',
     'grace',
@@ -255,9 +260,9 @@ lilypond_music_commands = (
     'mergeDifferentlyDottedOn',
     'mergeDifferentlyHeadedOff',
     'mergeDifferentlyHeadedOn',
-    'mf',
+    #'mf',
     'mm',
-    'mp',
+    #'mp',
     'musicMap',
     'neumeDemoLayout',
     'new',
@@ -277,7 +282,7 @@ lilypond_music_commands = (
     'override',
     'overrideProperty',
     'overrideTimeSignatureSettings',  # since 2.16
-    'p',
+    #'p',
     'pageBreak',
     'pageTurn',
     'palmMute',  # since 2.16
@@ -302,10 +307,10 @@ lilypond_music_commands = (
     'pitchedTrill',
     'pointAndClickOff',
     'pointAndClickOn',
-    'pp',
-    'ppp',
-    'pppp',
-    'ppppp',
+    #'pp',
+    #'ppp',
+    #'pppp',
+    #'ppppp',
     'predefinedFretboardsOff',
     'predefinedFretboardsOn',
     'pt',
@@ -322,7 +327,7 @@ lilypond_music_commands = (
     'responsum',
     'rest',
     'revert',
-    'rfz',
+    #'rfz',
     'rightHandFinger',
     'sacredHarpHeads',
     'sacredHarpHeadsMinor',
@@ -330,10 +335,10 @@ lilypond_music_commands = (
     'scoreTweak',
     'semiGermanChords',
     'set',
-    'sf',
-    'sff',
-    'sfp',
-    'sfz',
+    #'sf',
+    #'sff',
+    #'sfp',
+    #'sfz',
     'shape', # since 2.16
     'shiftDurations',
     'shiftOff',
@@ -355,9 +360,9 @@ lilypond_music_commands = (
     'sostenutoOn',
     'southernHarmonyHeads',
     'southernHarmonyHeadsMinor',
-    'sp',
+    #'sp',
     'spacingTweaks',
-    'spp',
+    #'spp',
     'startAcciaccaturaMusic',
     'startAppoggiaturaMusic',
     'startGraceMusic',
@@ -432,6 +437,44 @@ lilypond_music_commands = (
     'walkerHeadsMinor',
     'whiteTriangleMarkup',
     'withMusicProperty',
+)
+
+dynamics = (
+    'p',
+    'pp',
+    'ppp',
+    'pppp',
+    'ppppp',
+    'f',
+    'ff',
+    'fff',
+    'ffff',
+    'fffff',
+    'mf',
+    'mp',
+    'sf',
+    'sff',
+    'sfp',
+    'sfz',
+    'sp',
+    'spp',
+    'rfz',
+    'fp',
+    'fz',  
+    'cr',
+    'cresc',
+    'crescHairpin',
+    'crescTextCresc',
+    'decr',
+    'decresc',
+    'dim',
+    'dimHairpin',
+    'dimTextDecr',
+    'dimTextDecresc',
+    'dimTextDim',
+    '<',
+    '>',
+    '!',
 )
 
 articulations = (
