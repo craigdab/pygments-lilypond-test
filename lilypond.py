@@ -29,6 +29,9 @@ class LilyPondLexer(RegexLexer):
             #(r'cresc|decresc|dim|cr|decr', Name.Entity),
             #(r'\\\<|\\\>', Name.Entity),
 
+            (r'\\f[\s|\\]', Name.Entity),
+            (r'\\p[\s|\\]', Name.Entity),
+
             (r'\)(?![A-Za-z])', Name.Function),
 
             # duration

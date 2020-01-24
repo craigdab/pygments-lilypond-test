@@ -224,7 +224,7 @@ lilypond_music_commands = (
     'IJ',
     'improvisationOff',
     'improvisationOn',
-    'in',
+    'in\s',
     'inclinatum',
     'includePageLayoutFile',
     'indent',
@@ -440,12 +440,12 @@ lilypond_music_commands = (
 )
 
 dynamics = (
-    'p',
+    #'p',
     'pp',
     'ppp',
     'pppp',
     'ppppp',
-    'f',
+    #'f',
     'ff',
     'fff',
     'ffff',
